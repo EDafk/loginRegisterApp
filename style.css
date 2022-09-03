@@ -74,7 +74,7 @@ opacity: 0.85;
 
 .nav {
     height: 70px;
-    background-color: salmon;
+    background-color: rgba(70, 142, 242, 0.7);
     display: none;
     position: relative;
 }
