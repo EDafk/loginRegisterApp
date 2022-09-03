@@ -1,0 +1,175 @@
+body{
+    background-image: url("background.jpg");
+    max-width: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#login-form {
+    width: 300px;
+    background-color: rgba(39, 83, 141, 0.5);
+    border-radius: 10px;
+    padding: 40px;
+    margin: 5% auto;
+    display: block;
+}
+
+#login-form h1 {
+    text-align: center;
+    margin: 55px 0;
+    font-size: 42px;
+}
+
+#login-form input, .blog-input{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #889199;
+    font-size: 18px;
+    outline: none;
+
+}
+p{
+    font-size: 20px;
+}
+a{
+color:white
+}
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 8px;
+    background: rgb(34,41,93);
+    background: linear-gradient(80deg, rgba(34,41,93,1) 2%, rgba(69,168,237,1) 91%);    
+opacity: 0.85;
+}
+
+.login-btn:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+
+#login-form p {
+    text-align: center;
+    margin-top: 50px;
+
+}
+
+.error-msg {
+    font-size: 22px;
+    color: red;
+    font-weight: 400;
+    display: none;
+}
+
+.nav {
+    height: 70px;
+    background-color: salmon;
+    display: none;
+    position: relative;
+}
+
+.logout-block {
+    position: absolute;
+    right: 20px;
+    padding: 10px 4px;
+}
+
+#register-form {
+    display: none;
+    width: 300px;
+    background-color: rgba(39, 83, 141, 0.5);
+    border-radius: 10px;
+    padding: 40px;
+    margin: 5% auto;
+}
+
+#register-form h1 {
+    text-align: center;
+    margin: 55px 0;
+    font-size: 42px;
+}
+
+#register-form input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 2px solid #889199;
+    font-size: 18px;
+    outline: none;
+
+}
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 8px;
+    background: rgb(34,41,93);
+    background: linear-gradient(80deg, rgba(34,41,93,1) 2%, rgba(69,168,237,1) 91%);    
+    opacity: 0.85;
+}
+.register-btn:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.blog-area{
+    position: relative;
+    top: 70px;
+    width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.blog-post-btn{
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+    border: none;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    border-radius: 8px;
+    background: rgb(34,41,93);
+opacity: 0.85;
+}
+
+.blog-post-btn:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.posted-blog {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.blog-title{
+    color: rgb(182, 63, 7);
+    font-size: 24px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+

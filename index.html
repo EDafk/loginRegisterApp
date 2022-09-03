@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Login & register form</title>
+</head>
+
+<body>
+    <div class="nav">
+        <div class="logout-block">
+            <button onclick="logout()" id="logOut">Log out</button>
+            <span id="user-name"></span>
+            <img style="border-radius: 50%;" height="50" src="image.png" alt="">
+        </div>
+        <div class="blog-area">
+            <input id="blog-title" class="blog-input" type="text" placeholder="Blog title">
+            <textarea id="blog-content" class="blog-input" placeholder="Blog story . . ." cols="30" rows="10"></textarea>
+            <button class="blog-post-btn" onclick="blogPost()">Post blog</button>
+            <br>
+            <hr>
+            <input id="search" type="text" placeholder="Search for blog. . .">
+            <div id="published-blogs"></div>
+        </div>
+    </div>
+
+    <div id="login-form">
+        <h1>Login</h1>
+        <input id="email" type="text" placeholder="Email or password">
+        <input onkeyup="loginOnEnter(event)" id="password" type="password" placeholder="Password">
+        <p class="error-msg">Invalid credentials!</p>
+        <button onclick="login({})" class="login-btn">Login</button>
+
+        <p>Don't have an account? <a onclick="signUp()" href="#">Sign up</a></p>
+
+    </div>
+
+    <div id="register-form">
+
+        <h1>Register</h1>
+        <input type="text" id="regName" placeholder="Name">
+        <input type="text" id="regEmail" placeholder="email">
+        <input type="text" id="regAddress" placeholder="Address">
+        <input type="text" id="regUsername" placeholder="Username">
+        <input type="password" id="regPassword" placeholder="Password">
+        <p>Already have an account? <a onclick="login()" href="">Log in</a></p>
+        <button onclick="registerNow()" class="register-btn">Register for free</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
