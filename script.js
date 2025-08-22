@@ -2,7 +2,6 @@
 const SUPER_ADMIN = {
     name: "SuperAdmin",
     email: "admin.email@gmail.com",
-    address: "Olovska 118",
     username: "superadmin",
     password: "1010"
 };
@@ -99,17 +98,15 @@ function goToLoginForm(){
 function registerNow() {
     var name = document.getElementById('regName').value;
     var email = document.getElementById('regEmail').value;
-    var address = document.getElementById('regAddress').value;
     var username = document.getElementById('regUsername').value;
     var password = document.getElementById('regPassword').value;
 
-    if (name === '' || email === '' || address === '' || username === '' || password === '') {
+    if (name === '' || email === '' || username === '' || password === '') {
         alert('Unesite sve podatke');
     } else {
         var newUser = {
             name,
             email,
-            address,
             username,
             password
         };
@@ -119,7 +116,6 @@ function registerNow() {
 
         clearValue('regName');
         clearValue('regEmail');
-        clearValue('regAddress');
         clearValue('regUsername');
         clearValue('regPassword');
 
