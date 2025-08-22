@@ -1,10 +1,23 @@
-var user = [{
-    name: 'Hamid Hamidovic',
-    email: 'moj@mail.com',
-    address: 'Grbavicka br12',
-    username: 'hame',
-    password: '1234'
-}];
+// Define Super Admin credentials
+const SUPER_ADMIN = {
+    name: "SuperAdmin",
+    email: "admin.email@gmail.com",
+    address: "Olovska 118",
+    username: "superadmin",
+    password: "1010"
+};
+
+// Initialize user array and ensure Super Admin exists
+var user = [];
+var usersData = localStorage.getItem('users');
+if (usersData) {
+    user = JSON.parse(usersData);
+}
+// Add Super Admin if not present
+if (!user.some(u => u.username === SUPER_ADMIN.username)) {
+    user.unshift(SUPER_ADMIN);
+    localStorage.setItem('users', JSON.stringify(user));
+}
 
 var loggedUser = {};
 var allBlogs = [];
@@ -144,36 +157,56 @@ function blogPost(){
     
 }
 
-function displayBlog(){
+function displayBlog() {
     var blogsData = localStorage.getItem('blogs');
-    if(blogsData){
-        allBlogs = (JSON.parse(blogsData))
+    if (blogsData) {
+        allBlogs = JSON.parse(blogsData);
     }
 
     var publishedBlogs = document.getElementById('published-blogs');
     publishedBlogs.innerHTML = '';
 
-    for(var blog of allBlogs){
-        var h3 = document.createElement('h3');
-        h3.innerHTML = blog.naslov;
-        h3.classList.add('blog-title');
-        var div = document.createElement('div');
-        div.classList.add('posted-blog');
-        var p = document.createElement('p');
-        p.innerHTML = blog.sadrzaj;
-        var span = document.createElement('span');
-        span.innerHTML = `Author: ${blog.author}`;
-        var datum = document.createElement('i');
-        datum.innerHTML = blog.postDate.toLocaleString();
+    allBlogs.forEach(function(blog, index) {
+        var blogDiv = document.createElement('div');
+        blogDiv.className = 'posted-blog';
 
-        div.appendChild(p);
-        div.appendChild(span);
-        div.appendChild(datum);
+        var title = document.createElement('div');
+        title.className = 'blog-title';
+        title.textContent = blog.naslov;
+        blogDiv.appendChild(title);
 
-        publishedBlogs.appendChild(h3);
-        publishedBlogs.appendChild(div);
+        var content = document.createElement('div');
+        content.textContent = blog.sadrzaj;
+        blogDiv.appendChild(content);
+
+        var info = document.createElement('div');
+        info.innerHTML = `<small>Posted by: ${blog.author} on ${new Date(blog.postDate).toLocaleString()}</small>`;
+        blogDiv.appendChild(info);
+
+        // Show delete button only for Super Admin
+        if (loggedUser && loggedUser.username === SUPER_ADMIN.username) {
+            var delBtn = document.createElement('button');
+            delBtn.textContent = 'Delete';
+            delBtn.style.marginLeft = '10px';
+            delBtn.onclick = function() {
+                deleteBlog(index);
+            };
+            blogDiv.appendChild(delBtn);
+        }
+
+        publishedBlogs.appendChild(blogDiv);
+    });
+}
+
+function deleteBlog(index) {
+    // Only Super Admin can delete
+    if (!loggedUser || loggedUser.username !== SUPER_ADMIN.username) {
+        alert("Only Super Admin can delete blogs.");
+        return;
     }
-    
+    allBlogs.splice(index, 1);
+    localStorage.setItem('blogs', JSON.stringify(allBlogs));
+    displayBlog();
 }
 
 function searchBlogs(){
@@ -181,4 +214,59 @@ function searchBlogs(){
     
 }
 
+function showRegisteredUsers() {
+    if (!loggedUser || loggedUser.username !== SUPER_ADMIN.username) {
+        alert("Only Super Admin can view registered users.");
+        return;
+    }
+
+    var container = document.getElementById('users-list-container');
+    var btn = document.getElementById('toggle-users-btn');
+
+    // Toggle visibility
+    if (container.style.display === 'block' || container.innerHTML) {
+        container.innerHTML = '';
+        container.style.display = 'none';
+        btn.textContent = 'Show Registered Users';
+    } else {
+        var usersData = localStorage.getItem('users');
+        var usersList = usersData ? JSON.parse(usersData) : user;
+
+        container.innerHTML = '<div id="users-list"><h3>Registered Users:</h3></div>';
+        container.style.display = 'block';
+
+        var usersListDiv = container.querySelector('#users-list');
+        var ul = document.createElement('ul');
+        usersList.forEach(function(u) {
+            var li = document.createElement('li');
+            li.textContent = `${u.name} (${u.username}, ${u.email}) `;
+            if (u.username !== SUPER_ADMIN.username) {
+                var delBtn = document.createElement('button');
+                delBtn.textContent = 'Delete';
+                delBtn.style.marginLeft = '10px';
+                delBtn.onclick = function() {
+                    deleteUser(u.username);
+                };
+                li.appendChild(delBtn);
+            }
+            ul.appendChild(li);
+        });
+        usersListDiv.appendChild(ul);
+        btn.textContent = 'Hide Registered Users';
+    }
+}
+
+function deleteUser(username) {
+    var usersData = localStorage.getItem('users');
+    var usersList = usersData ? JSON.parse(usersData) : user;
+
+    // Remove user by username
+    usersList = usersList.filter(u => u.username !== username);
+
+    // Update localStorage and global user array
+    localStorage.setItem('users', JSON.stringify(usersList));
+    user = usersList;
+
+    showRegisteredUsers(); // Refresh the list
+}
 //komentari = [{author: 'johny', text: 'Ovo je super blog', date: new Date()}]

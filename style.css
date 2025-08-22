@@ -173,3 +173,9 @@ opacity: 0.85;
     margin-bottom: 10px;
 }
 
+#users-list-container {
+    width: max-content;
+    margin-bottom: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.445);
+}
