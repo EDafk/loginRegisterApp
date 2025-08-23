@@ -56,6 +56,7 @@ function login(users) {
             clearValue('email');
             clearValue('password');
             loggedUser = useri;
+            document.getElementById('welcome').innerHTML = `Hello ${loggedUser.name}`;  // Display welcome message
 
         } else {
             var errorMSg = document.querySelector('#login-form .error-msg');
@@ -269,4 +270,52 @@ function deleteUser(username) {
 
     showRegisteredUsers(); // Refresh the list
 }
-//komentari = [{author: 'johny', text: 'Ovo je super blog', date: new Date()}]
+
+// Live search for blogs
+document.getElementById('search').addEventListener('input', function(e) {
+    const keyword = e.target.value.toLowerCase();
+    var blogsData = localStorage.getItem('blogs');
+    var filteredBlogs = [];
+
+    if (blogsData) {
+        filteredBlogs = JSON.parse(blogsData).filter(function(blog) {
+            return blog.naslov.toLowerCase().includes(keyword) ||
+                   blog.sadrzaj.toLowerCase().includes(keyword) ||
+                   (blog.author && blog.author.toLowerCase().includes(keyword));
+        });
+    }
+
+    var publishedBlogs = document.getElementById('published-blogs');
+    publishedBlogs.innerHTML = '';
+
+    filteredBlogs.forEach(function(blog, index) {
+        var blogDiv = document.createElement('div');
+        blogDiv.className = 'posted-blog';
+
+        var title = document.createElement('div');
+        title.className = 'blog-title';
+        title.textContent = blog.naslov;
+        blogDiv.appendChild(title);
+
+        var content = document.createElement('div');
+        content.textContent = blog.sadrzaj;
+        blogDiv.appendChild(content);
+
+        var info = document.createElement('div');
+        info.innerHTML = `<small>Posted by: ${blog.author} on ${new Date(blog.postDate).toLocaleString()}</small>`;
+        blogDiv.appendChild(info);
+
+        // Show delete button only for Super Admin in a searched list
+        if (loggedUser && loggedUser.username === SUPER_ADMIN.username) {
+            var delBtn = document.createElement('button');
+            delBtn.textContent = 'Delete';
+            delBtn.style.marginLeft = '10px';
+            delBtn.onclick = function() {
+                deleteBlog(index);
+            };
+            blogDiv.appendChild(delBtn);
+        }
+
+        publishedBlogs.appendChild(blogDiv);
+    });
+});

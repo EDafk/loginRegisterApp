@@ -69,7 +69,7 @@ body {
     font-weight: 500;
     color: #fff;
     border-radius: 10px;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #031d4e 0%, #001335 100%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
@@ -165,5 +165,33 @@ body {
     font-weight: 500;
     cursor: pointer;
     margin-left: 10px;
+    transition: background 0.2s;
+}
+
+#dlt_all {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff4d4d 0%, #ff6a6a 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px;
+    display: block;
+    transition: background 0.2s;
+}
+
+#toggle-users-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 20px;
+    display: block;
     transition: background 0.2s;
 }
