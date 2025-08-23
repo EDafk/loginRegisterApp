@@ -42,8 +42,12 @@ function login(users) {
 
     for (var useri of user) {
         if (email === useri.email || username === useri.username && password === useri.password) {
-            var loginForm = document.getElementById('login-form');
+        var loginForm = document.getElementById('login-form');  //removing login form after login
             loginForm.style.display = 'none';
+        var registerForm = document.getElementById('register-form'); //removing register form after login
+            if (registerForm) {
+            registerForm.style.display = 'none';
+        }
             var nav = document.querySelector('.nav');
             nav.style.display = 'block';
             var name = document.getElementById('user-name');
